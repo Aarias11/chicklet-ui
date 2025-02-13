@@ -9,28 +9,28 @@
   "module": "dist/react/esm/index.js",
   "types": "dist/react/esm/index.d.ts",
   "exports": {
-    "./package.json": "./package.json",
-    "./react": {
-      "import": "./dist/react/esm/index.js",
-      "require": "./dist/react/cjs/index.js"
-    },
-    ".": {
-      "import": "./dist/react/esm/index.js",
-      "require": "./dist/react/cjs/index.js"
-    },
-    "./styles/tailwind.css": "./dist/styles/tailwind.css"
+  "./package.json": "./package.json",
+  "./react": {
+    "import": "./dist/react/esm/index.js",
+    "require": "./dist/react/cjs/index.js"
   },
-  "files": [
-    "dist",
-    "dist/styles/tailwind.css"
-  ],
+  ".": {
+    "import": "./dist/react/esm/index.js",
+    "require": "./dist/react/cjs/index.js"
+  },
+  "./styles/tailwind.css": "./dist/styles/tailwind.css"
+},
+"files": [
+  "dist",
+  "dist/styles"
+],
   "scripts": {
     "build:react:cjs": "tsc --project tsconfig.react.json --module CommonJS --outDir dist/react/cjs",
     "build:react:esm": "tsc --project tsconfig.react.json --module ESNext --outDir dist/react/esm",
     "build:react": "npm run build:react:cjs && npm run build:react:esm",
     "build:vite": "tsc --project tsconfig.vite.json",
     "build:next": "tsc --project tsconfig.next.json",
-    "build": "npm run build:react && npm run build:vite && npm run build:next && mkdir -p dist/styles && cp -r src/styles/* dist/styles/"
+    "build": "npm run build:react && npm run build:vite && npm run build:next && mkdir -p dist/styles && cp src/styles/tailwind.css dist/styles/tailwind.css"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
