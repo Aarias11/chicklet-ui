@@ -1,8 +1,8 @@
 {
   "name": "chicklet-library-ui",
-  "version": "1.0.7",
-  "description": "Your component library",
-  "author": "Your Name",
+  "version": "1.0.8",
+  "description": "Chicklet-UI component library",
+  "author": "",
   "license": "MIT",
   "keywords": [],
   "main": "dist/react/cjs/index.js",
@@ -14,6 +14,10 @@
       "import": "./dist/react/esm/index.js",
       "require": "./dist/react/cjs/index.js"
     },
+    "./next": {
+      "import": "./dist/next/index.js",
+      "require": "./dist/next/index.js"
+    },
     ".": {
       "import": "./dist/react/esm/index.js",
       "require": "./dist/react/cjs/index.js"
@@ -23,6 +27,7 @@
     "dist"
   ],
   "scripts": {
+    "test": "jest --config jest.config.js --watch",
     "build:react:cjs": "tsc --project tsconfig.react.json --module CommonJS --outDir dist/react/cjs",
     "build:react:esm": "tsc --project tsconfig.react.json --module ESNext --outDir dist/react/esm",
     "build:react": "npm run build:react:cjs && npm run build:react:esm",
@@ -33,7 +38,8 @@
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0",
-    "tailwindcss": "^3.0.0"
+    "tailwindcss": "^3.0.0",
+    "next": "^14.0.0"
   },
   "dependencies": {
     "framer-motion": "^12.4.2"

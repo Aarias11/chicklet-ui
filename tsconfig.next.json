@@ -1,8 +1,15 @@
 {
-    "extends": "./tsconfig.json",
-    "compilerOptions": {
-      "outDir": "dist/next",
-      "jsx": "preserve"
-    }
-  }
-  
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist/next",
+    "jsx": "preserve",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": false
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}
