@@ -1,10 +1,6 @@
 {
   "name": "chicklet-library-ui",
-<<<<<<< HEAD
   "version": "1.0.13",
-=======
-  "version": "1.0.9",
->>>>>>> caf36f54 (Added Vite and Next.js to chickletui and fixed jest deprecated warning for testing)
   "description": "Chicklet-UI component library",
   "author": "",
   "license": "MIT",
@@ -46,15 +42,9 @@
   },
   "peerDependencies": {
     "next": "^14.0.0 || ^15.0.0",
-<<<<<<< HEAD
-    "react": "^18.0.0 || ^19.0.0",
-    "react-dom": "^18.0.0 || ^19.0.0",
-    "tailwindcss": "^3.0.0"
-=======
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwindcss": "^3.0.0 || ^4.0.0"
->>>>>>> caf36f54 (Added Vite and Next.js to chickletui and fixed jest deprecated warning for testing)
   },
   "dependencies": {
     "framer-motion": "^12.4.2"
