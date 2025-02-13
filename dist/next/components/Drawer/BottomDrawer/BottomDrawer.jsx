@@ -1,3 +1,4 @@
+"use client"; // Forces Next.js to run this component in the browser
 import React, { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 const isBrowser = typeof window !== "undefined"; // Prevents SSR issues
@@ -28,7 +29,6 @@ const BottomDrawer = ({ isOpen, onClose, height = "500px", overlayColor = "bg-bl
             window.removeEventListener("keydown", handleKeyDown);
         };
     }, [isOpen, onClose]);
-    // **Updated Animation**
     const overlayVariants = {
         hidden: { opacity: 0 },
         visible: { opacity: 1 },
@@ -41,16 +41,12 @@ const BottomDrawer = ({ isOpen, onClose, height = "500px", overlayColor = "bg-bl
     };
     return (<AnimatePresence>
       {isOpen && (<>
-          {/* ✅ Overlay (Ensures it’s behind the drawer) */}
-          <motion.div data-testid="drawer-overlay" // ✅ Added test ID
-         className={`fixed inset-0 z-[50] flex flex-col justify-end ${overlayColor}`} variants={overlayVariants} initial="hidden" animate="visible" exit="exit" transition={{ duration: 0.3 }} role="presentation" // ✅ Change from "dialog" to "presentation"
-         aria-hidden="true" tabIndex={-1} onClick={onClose} // ✅ Close when clicking outside
-        />
+          {/* Overlay */}
+          <motion.div className={`fixed inset-0 z-[50] flex flex-col justify-end ${overlayColor}`} variants={overlayVariants} initial="hidden" animate="visible" exit="exit" transition={{ duration: 0.3 }} role="presentation" aria-hidden="true" tabIndex={-1} onClick={onClose}/>
 
-          {/* ✅ Bottom Drawer (Ensures it’s above the overlay) */}
-          <motion.div data-testid="drawer-container" className={`fixed bottom-0 left-0 w-full ${drawerColor} rounded-t-3xl shadow-lg z-[60]`} // ✅ Higher z-index
-         style={{ height }} variants={drawerVariants} initial="hidden" animate="visible" exit="exit" transition={{ duration: 0.3 }} onClick={(e) => e.stopPropagation()} // ✅ Prevent closing when clicking inside
-        >
+          {/* Drawer */}
+          <motion.div className={`fixed bottom-0 left-0 w-full ${drawerColor} rounded-t-3xl shadow-lg z-[60]`} style={{ height }} // Ensure height is applied here
+         variants={drawerVariants} initial="hidden" animate="visible" exit="exit" transition={{ duration: 0.3 }} onClick={(e) => e.stopPropagation()}>
             {/* Close Button */}
             <div className="p-4 flex justify-end">
               <button className="text-gray-600 hover:text-gray-700 p-2 rounded" onClick={onClose} aria-label="Close Drawer">

@@ -1,3 +1,5 @@
+"use client"; // Forces Next.js to run this component in the browser
+
 import React, { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -16,7 +18,7 @@ interface BottomDrawerProps {
 const BottomDrawer: React.FC<BottomDrawerProps> = ({
   isOpen,
   onClose,
-  height = "500px",
+  height = "500px", 
   overlayColor = "bg-black/50",
   drawerColor = "bg-black",
   closeButton,
@@ -52,7 +54,6 @@ const BottomDrawer: React.FC<BottomDrawerProps> = ({
     };
   }, [isOpen, onClose]);
 
-  // **Updated Animation**
   const overlayVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
@@ -69,32 +70,30 @@ const BottomDrawer: React.FC<BottomDrawerProps> = ({
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* ✅ Overlay (Ensures it’s behind the drawer) */}
+          {/* Overlay */}
           <motion.div
-            data-testid="drawer-overlay" // ✅ Added test ID
             className={`fixed inset-0 z-[50] flex flex-col justify-end ${overlayColor}`}
             variants={overlayVariants}
             initial="hidden"
             animate="visible"
             exit="exit"
             transition={{ duration: 0.3 }}
-            role="presentation" // ✅ Change from "dialog" to "presentation"
+            role="presentation"
             aria-hidden="true"
             tabIndex={-1}
-            onClick={onClose} // ✅ Close when clicking outside
+            onClick={onClose}
           />
 
-          {/* ✅ Bottom Drawer (Ensures it’s above the overlay) */}
+          {/* Drawer */}
           <motion.div
-            data-testid="drawer-container"
-            className={`fixed bottom-0 left-0 w-full ${drawerColor} rounded-t-3xl shadow-lg z-[60]`} // ✅ Higher z-index
-            style={{ height }}
+            className={`fixed bottom-0 left-0 w-full ${drawerColor} rounded-t-3xl shadow-lg z-[60]`}
+            style={{ height }} // Ensure height is applied here
             variants={drawerVariants}
             initial="hidden"
             animate="visible"
             exit="exit"
             transition={{ duration: 0.3 }}
-            onClick={(e) => e.stopPropagation()} // ✅ Prevent closing when clicking inside
+            onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
             <div className="p-4 flex justify-end">
