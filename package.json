@@ -1,0 +1,55 @@
+{
+  "name": "chicklet-library-ui",
+  "version": "1.0.1",
+  "description": "Your component library",
+  "author": "Your Name",
+  "license": "MIT",
+  "keywords": [],
+  "main": "dist/react/cjs/index.js",
+  "module": "dist/react/esm/index.js",
+  "types": "dist/react/esm/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    "./react": {
+      "import": "./dist/react/esm/index.js",
+      "require": "./dist/react/cjs/index.js"
+    },
+    ".": {
+      "import": "./dist/react/esm/index.js",
+      "require": "./dist/react/cjs/index.js"
+    },
+    "./styles": {
+      "import": "./dist/styles/tailwind.css",
+      "require": "./dist/styles/tailwind.css"
+    }
+  },
+  "files": [
+    "dist",
+    "dist/styles/tailwind.css"
+  ],
+  "scripts": {
+    "build:react:cjs": "tsc --project tsconfig.react.json --module CommonJS --outDir dist/react/cjs",
+    "build:react:esm": "tsc --project tsconfig.react.json --module ESNext --outDir dist/react/esm",
+    "build:react": "npm run build:react:cjs && npm run build:react:esm",
+    "build:vite": "tsc --project tsconfig.vite.json",
+    "build:next": "tsc --project tsconfig.next.json",
+    "build": "npm run build:react && npm run build:vite && npm run build:next && mkdir -p dist/styles && cp src/styles/tailwind.css dist/styles/tailwind.css"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "dependencies": {
+    "framer-motion": "^12.4.2"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^13.4.0",
+    "@types/jest": "^29.5.14",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "tailwindcss": "^3.4.17",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.7.3"
+  }
+}
