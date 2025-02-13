@@ -1,2 +1,2 @@
-import "chicklet-ui-component-library/styles/tailwind.css";
+import "chicklet-library-ui/dist/styles/tailwind.css";
 export * from "./components/Drawer";
