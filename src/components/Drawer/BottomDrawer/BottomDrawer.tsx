@@ -72,6 +72,7 @@ const BottomDrawer: React.FC<BottomDrawerProps> = ({
         <>
           {/* Overlay */}
           <motion.div
+            data-testid="drawer-overlay"
             className={`fixed inset-0 z-[50] flex flex-col justify-end ${overlayColor}`}
             variants={overlayVariants}
             initial="hidden"

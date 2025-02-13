@@ -1,6 +1,10 @@
 {
   "name": "chicklet-library-ui",
+<<<<<<< HEAD
   "version": "1.0.13",
+=======
+  "version": "1.0.9",
+>>>>>>> caf36f54 (Added Vite and Next.js to chickletui and fixed jest deprecated warning for testing)
   "description": "Chicklet-UI component library",
   "author": "",
   "license": "MIT",
@@ -18,6 +22,10 @@
       "import": "./dist/next/index.js",
       "require": "./dist/next/index.js"
     },
+    "./vite": {
+      "import": "./dist/vite/index.js",
+      "require": "./dist/vite/index.js"
+    },
     ".": {
       "import": "./dist/react/esm/index.js",
       "require": "./dist/react/cjs/index.js"
@@ -27,26 +35,33 @@
     "dist"
   ],
   "scripts": {
-    "test": "jest --config jest.config.js --watch",
+    "test": "jest --config jest.config.js src",
+    "test:ci": "jest --config jest.config.js --runInBand",
     "build:react:cjs": "tsc --project tsconfig.react.json --module CommonJS --outDir dist/react/cjs",
     "build:react:esm": "tsc --project tsconfig.react.json --module ESNext --outDir dist/react/esm",
     "build:react": "npm run build:react:cjs && npm run build:react:esm",
-    "build:vite": "tsc --project tsconfig.vite.json",
+    "build:vite": "vite build",
     "build:next": "tsc --project tsconfig.next.json",
     "build": "npm run build:react && npm run build:vite && npm run build:next"
   },
   "peerDependencies": {
     "next": "^14.0.0 || ^15.0.0",
+<<<<<<< HEAD
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0",
     "tailwindcss": "^3.0.0"
+=======
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwindcss": "^3.0.0 || ^4.0.0"
+>>>>>>> caf36f54 (Added Vite and Next.js to chickletui and fixed jest deprecated warning for testing)
   },
   "dependencies": {
     "framer-motion": "^12.4.2"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^13.4.0",
+    "@testing-library/react": "^16.2.0",
     "@types/jest": "^29.5.14",
     "@vitejs/plugin-react": "^4.3.4",
     "jest": "^29.7.0",

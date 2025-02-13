@@ -1,8 +1,15 @@
 {
-    "extends": "./tsconfig.json",
-    "compilerOptions": {
-      "outDir": "dist/vite",
-      "jsx": "react-jsx"
-    }
-  }
-  
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist/vite",
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": false
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
