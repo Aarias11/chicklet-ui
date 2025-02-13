@@ -1,6 +1,6 @@
 {
   "name": "chicklet-library-ui",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Your component library",
   "author": "Your Name",
   "license": "MIT",
@@ -9,17 +9,17 @@
   "module": "dist/react/esm/index.js",
   "types": "dist/react/esm/index.d.ts",
   "exports": {
-  "./package.json": "./package.json",
-  "./react": {
-    "import": "./dist/react/esm/index.js",
-    "require": "./dist/react/cjs/index.js"
+    "./package.json": "./package.json",
+    "./react": {
+      "import": "./dist/react/esm/index.js",
+      "require": "./dist/react/cjs/index.js"
+    },
+    ".": {
+      "import": "./dist/react/esm/index.js",
+      "require": "./dist/react/cjs/index.js"
+    },
+    "./styles/tailwind.css": "./dist/styles/tailwind.css"
   },
-  ".": {
-    "import": "./dist/react/esm/index.js",
-    "require": "./dist/react/cjs/index.js"
-  },
-  "./styles/tailwind.css": "./dist/styles/tailwind.css"
-},
   "files": [
     "dist",
     "dist/styles"
