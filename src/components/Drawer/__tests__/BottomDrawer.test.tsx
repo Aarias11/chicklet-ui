@@ -9,17 +9,19 @@ describe("BottomDrawer Component", () => {
     expect(screen.getByText("Hello")).toBeInTheDocument();
   });
 
+    // Test calling onClose when clicking outside drawer
   test("calls onClose when clicking outside the drawer", async () => {
     const mockOnClose = jest.fn();
     render(<BottomDrawer isOpen={true} onClose={mockOnClose}>Hello</BottomDrawer>);
 
-    // ✅ Ensure overlay appears before interaction
+    // Ensures overlay appears before interaction
     const overlay = await waitFor(() => screen.getByTestId("drawer-overlay"));
     fireEvent.click(overlay);
 
     expect(mockOnClose).toHaveBeenCalledTimes(1);
   });
 
+    // Testing closes when pressing Escape key
   test("closes when pressing Escape key", () => {
     const mockOnClose = jest.fn();
     render(<BottomDrawer isOpen={true} onClose={mockOnClose}>Hello</BottomDrawer>);
@@ -29,6 +31,8 @@ describe("BottomDrawer Component", () => {
     expect(mockOnClose).toHaveBeenCalledTimes(1);
   });
 
+
+    // Testing renders children inside the drawer
   test("renders children inside the drawer", () => {
     render(
       <BottomDrawer isOpen={true} onClose={jest.fn()}>
@@ -38,6 +42,8 @@ describe("BottomDrawer Component", () => {
     expect(screen.getByText("Test Content")).toBeInTheDocument();
   });
 
+
+    //Testing drawer does not close when clicking inside drawer
   test("does not close when clicking inside the drawer", () => {
     const mockOnClose = jest.fn();
     render(
@@ -46,9 +52,9 @@ describe("BottomDrawer Component", () => {
       </BottomDrawer>
     );
 
-    fireEvent.click(screen.getByTestId("inside-drawer")); // ✅ Click inside
+    fireEvent.click(screen.getByTestId("inside-drawer")); // Click inside
 
-    expect(mockOnClose).not.toHaveBeenCalled(); // ✅ Ensure drawer remains open
+    expect(mockOnClose).not.toHaveBeenCalled(); // Ensure drawer remains open
   });
 
   test("does not render when isOpen is false", () => {
