@@ -1,2 +1,2 @@
-export { default } from "./SingActiveAccordion";
-export * from "./SingActiveAccordion";
+export { default } from "./SingleActiveAccordion";
+export * from "./SingleActiveAccordion";

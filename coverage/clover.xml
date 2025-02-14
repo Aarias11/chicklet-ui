@@ -1,8 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1739549217112" clover="3.2.0">
-  <project timestamp="1739549217112" name="All files">
-    <metrics statements="52" coveredstatements="52" conditionals="32" coveredconditionals="28" methods="16" coveredmethods="16" elements="100" coveredelements="96" complexity="0" loc="52" ncloc="52" packages="2" files="4" classes="4"/>
-    <package name="BottomDrawer">
+<coverage generated="1739554312586" clover="3.2.0">
+  <project timestamp="1739554312586" name="All files">
+    <metrics statements="68" coveredstatements="68" conditionals="46" coveredconditionals="41" methods="23" coveredmethods="22" elements="137" coveredelements="131" complexity="0" loc="68" ncloc="68" packages="3" files="6" classes="6"/>
+    <package name="Accordion.SingleActiveAccordion">
+      <metrics statements="16" coveredstatements="16" conditionals="14" coveredconditionals="13" methods="7" coveredmethods="6"/>
+      <file name="SingleActiveAccordion.tsx" path="/Users/alanarias/Desktop/Coding Projects/ChickletUIComponentLibrary/chicklet-ui-component-library/src/components/Accordion/SingleActiveAccordion/SingleActiveAccordion.tsx">
+        <metrics statements="14" coveredstatements="14" conditionals="14" coveredconditionals="13" methods="6" coveredmethods="5"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="24" count="15" type="stmt"/>
+        <line num="26" count="15" type="stmt"/>
+        <line num="27" count="9" type="stmt"/>
+        <line num="28" count="9" type="cond" truecount="2" falsecount="0"/>
+        <line num="29" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="31" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="36" count="15" type="stmt"/>
+        <line num="39" count="45" type="stmt"/>
+        <line num="41" count="45" type="stmt"/>
+        <line num="46" count="9" type="stmt"/>
+        <line num="68" count="1" type="stmt"/>
+      </file>
+      <file name="index.ts" path="/Users/alanarias/Desktop/Coding Projects/ChickletUIComponentLibrary/chicklet-ui-component-library/src/components/Accordion/SingleActiveAccordion/index.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="7" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="Drawer.BottomDrawer">
       <metrics statements="26" coveredstatements="26" conditionals="16" coveredconditionals="14" methods="8" coveredmethods="8"/>
       <file name="BottomDrawer.tsx" path="/Users/alanarias/Desktop/Coding Projects/ChickletUIComponentLibrary/chicklet-ui-component-library/src/components/Drawer/BottomDrawer/BottomDrawer.tsx">
         <metrics statements="24" coveredstatements="24" conditionals="16" coveredconditionals="14" methods="7" coveredmethods="7"/>
@@ -37,7 +62,7 @@
         <line num="2" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="TopDrawer">
+    <package name="Drawer.TopDrawer">
       <metrics statements="26" coveredstatements="26" conditionals="16" coveredconditionals="14" methods="8" coveredmethods="8"/>
       <file name="TopDrawer.tsx" path="/Users/alanarias/Desktop/Coding Projects/ChickletUIComponentLibrary/chicklet-ui-component-library/src/components/Drawer/TopDrawer/TopDrawer.tsx">
         <metrics statements="24" coveredstatements="24" conditionals="16" coveredconditionals="14" methods="7" coveredmethods="7"/>
