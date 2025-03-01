@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { XIcon } from "@heroicons/react/outline";
+import { IconX } from '@tabler/icons-react'
 
 const isBrowser = typeof window !== "undefined"; // Prevents SSR issues
 
@@ -104,7 +104,7 @@ const BottomDrawer: React.FC<BottomDrawerProps> = ({
                 onClick={onClose}
                 aria-label="Close Drawer"
               >
-                {closeButton || <XIcon className="w-5 h-5" />}
+                {closeButton || <IconX className="w-5 h-5" />}
               </button>
             </div>
 
