@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { IconX } from '@tabler/icons-react'
+import { IconX } from "@tabler/icons-react";
 
 const isBrowser = typeof window !== "undefined"; // Prevents SSR issues
 
@@ -71,10 +71,10 @@ const BottomDrawer: React.FC<BottomDrawerProps> = ({
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Overlay */}
+          {/* Overlay - Ensures background is blocked */}
           <motion.div
             data-testid="drawer-overlay"
-            className={`fixed inset-0 z-[50] ${overlayColor}`}
+            className={`fixed inset-0 z-[100] ${overlayColor}`} // Updated z-index
             variants={overlayVariants}
             initial="hidden"
             animate="visible"
@@ -88,7 +88,7 @@ const BottomDrawer: React.FC<BottomDrawerProps> = ({
 
           {/* Drawer */}
           <motion.div
-            className={`fixed bottom-0 left-0 w-full ${drawerColor} ${borderRadius} ${shadow}`}
+            className={`fixed bottom-0 left-0 w-full ${drawerColor} ${borderRadius} ${shadow} z-[110]`} // Updated z-index
             style={{ height: computedHeight, padding }}
             variants={drawerVariants[animationType]}
             initial="hidden"
