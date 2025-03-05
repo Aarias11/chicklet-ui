@@ -1,17 +1,17 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { IconX, IconAlertHexagon } from "@tabler/icons-react";
+import { IconAlertCircle } from "@tabler/icons-react";
 import Image from "next/image";
 
-interface AlertDialogProps {
+interface ConfirmationDialogProps {
   isOpen: boolean;
   onClose: () => void;
   title?: string;
   description?: string;
-  icon?: string; // Optional custom image icon
-  iconColor?: string; // ✅ Allows changing the default icon color
+  icon?: string;
+  iconColor?: string;
   confirmText?: string;
   cancelText?: string;
   onConfirm?: () => void;
@@ -20,13 +20,13 @@ interface AlertDialogProps {
   dialogColor?: string;
 }
 
-const AlertDialog: React.FC<AlertDialogProps> = ({
+const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
   isOpen,
   onClose,
-  title = "Just a Heads Up!",
-  description = "Your session is about to expire. Don’t lose your progress! Click ‘Stay Logged In’ to continue.",
+  title = "Heads Up! This is Permanent",
+  description = "If you delete this, it’s gone for good. No take-backs! Are you sure you want to continue?",
   icon,
-  iconColor = "text-yellow-400", // ✅ Default yellow, but can be overridden
+  iconColor = "text-red-500",
   confirmText = "Stay Logged In",
   cancelText = "Log Out",
   onConfirm,
@@ -34,19 +34,19 @@ const AlertDialog: React.FC<AlertDialogProps> = ({
   overlayColor = "bg-black/80",
   dialogColor = "bg-black",
 }) => {
-  const dialogRef = useRef<HTMLDivElement>(null);
-
+  
   // ✅ Handle Escape Key Press
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen) return; // Only add event listener when dialog is open
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        onClose();
+        onClose(); // Close the dialog when Escape key is pressed
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
+    
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
@@ -71,32 +71,20 @@ const AlertDialog: React.FC<AlertDialogProps> = ({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            ref={dialogRef}
-            role="dialog"
-            aria-modal="true"
             className={`w-[470px] md:w-[570px] h-auto border rounded-xl border-white/15 ${dialogColor} p-8 z-[70] shadow-lg`}
             onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
           >
-            {/* Alert Header */}
+            {/* Confirmation Header */}
             <div className="w-full flex gap-3 items-center mb-2">
-              {/* Icon (Uses `IconAlertHexagon` as default, color customizable) */}
+              {/* Icon (Uses `IconAlertCircle` as default, color customizable) */}
               {icon ? (
-                <Image src={icon} alt="Alert Icon" width={22} height={22} className="rounded-lg" />
+                <Image src={icon} alt="Confirmation Icon" width={24} height={24} className="rounded-lg" />
               ) : (
-                <IconAlertHexagon size={22} className={iconColor} />
+                <IconAlertCircle size={24} className={iconColor} />
               )}
               
               {/* Header */}
               <span className="text-[18px] font-semibold text-white">{title}</span>
-
-              {/* Close Button */}
-              <button
-                className="ml-auto text-gray-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-white/50 rounded-full p-1"
-                onClick={onClose}
-                aria-label="Close alert"
-              >
-                <IconX size={20} />
-              </button>
             </div>
 
             {/* Description */}
@@ -112,7 +100,7 @@ const AlertDialog: React.FC<AlertDialogProps> = ({
                 {cancelText}
               </motion.button>
               <motion.button
-                className="px-[16px] py-[10px] border border-[#61DAFB]/40 rounded-lg bg-[#022432]/80 text-[#FFFFFF]/70 text-sm font-medium transition-all duration-300 hover:border-[#61DAFB] hover:text-[#FFFFFF] hover:shadow-lg hover:shadow-[#61DAFB]/10 hover:bg-[#022432]"
+                className="px-[16px] py-[10px] border border-[#D65E5E]/40 rounded-lg bg-[#B33737]/80 text-[#FFFFFF]/70 text-sm font-medium transition-all duration-300 hover:border-[#D65E5E] hover:text-[#FFFFFF] hover:shadow-lg hover:shadow-[#B33737]/30 hover:bg-[#B33737]"
                 whileTap={{ scale: 0.95 }}
                 onClick={onConfirm || onClose}
               >
@@ -126,4 +114,4 @@ const AlertDialog: React.FC<AlertDialogProps> = ({
   );
 };
 
-export default AlertDialog;
+export default ConfirmationDialog;
