@@ -10,7 +10,8 @@ interface AlertDialogProps {
   onClose: () => void;
   title?: string;
   description?: string;
-  icon?: string; // Optional custom icon
+  icon?: string; // Optional custom image icon
+  iconColor?: string; // ✅ New - Allows changing the default icon color
   confirmText?: string;
   cancelText?: string;
   onConfirm?: () => void;
@@ -25,6 +26,7 @@ const AlertDialog: React.FC<AlertDialogProps> = ({
   title = "Just a Heads Up!",
   description = "Your session is about to expire. Don’t lose your progress! Click ‘Stay Logged In’ to continue.",
   icon,
+  iconColor = "text-yellow-400", // ✅ Default yellow, but can be overridden
   confirmText = "Stay Logged In",
   cancelText = "Log Out",
   onConfirm,
@@ -56,11 +58,11 @@ const AlertDialog: React.FC<AlertDialogProps> = ({
           >
             {/* Alert Header */}
             <div className="w-full flex gap-3 items-center mb-2">
-              {/* Icon (Uses `IconAlertHexagon` as default) */}
+              {/* Icon (Uses `IconAlertHexagon` as default, color customizable) */}
               {icon ? (
                 <Image src={icon} alt="Alert Icon" width={22} height={22} className="rounded-lg" />
               ) : (
-                <IconAlertHexagon size={22} className="text-yellow-400" />
+                <IconAlertHexagon size={22} className={iconColor} />
               )}
               
               {/* Header */}
