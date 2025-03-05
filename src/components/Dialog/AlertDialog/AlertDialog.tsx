@@ -1,134 +1,97 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { IconX } from "@tabler/icons-react";
+import { IconX, IconAlertHexagon } from "@tabler/icons-react";
 import Image from "next/image";
 
-// ✅ Types for customization
-type AnimationType = "slide" | "fade" | "scale";
-type DialogSize = "small" | "medium" | "large";
-
-interface DialogProps {
+interface AlertDialogProps {
   isOpen: boolean;
   onClose: () => void;
-  size?: DialogSize;
-  animationType?: AnimationType;
-  overlayColor?: string;
-  dialogColor?: string;
-  borderRadius?: string;
-  shadow?: string;
-  padding?: string;
-  textColor?: string;
-  closeButton?: React.ReactNode;
   title?: string;
   description?: string;
-  icon?: string;
+  icon?: string; // Optional custom icon
   confirmText?: string;
   cancelText?: string;
   onConfirm?: () => void;
+  onCancel?: () => void;
+  overlayColor?: string;
+  dialogColor?: string;
 }
 
-const AlertDialog: React.FC<DialogProps> = ({
+const AlertDialog: React.FC<AlertDialogProps> = ({
   isOpen,
   onClose,
-  size = "medium",
-  animationType = "slide",
-  overlayColor = "bg-black/80",
-  dialogColor = "bg-black",
-  borderRadius = "rounded-xl",
-  shadow = "shadow-lg",
-  padding = "p-8",
-  textColor = "text-white",
-  closeButton,
   title = "Just a Heads Up!",
   description = "Your session is about to expire. Don’t lose your progress! Click ‘Stay Logged In’ to continue.",
   icon,
   confirmText = "Stay Logged In",
   cancelText = "Log Out",
   onConfirm,
+  onCancel,
+  overlayColor = "bg-black/80",
+  dialogColor = "bg-black",
 }) => {
-  // Handle Escape Key Press
-  useEffect(() => {
-    if (!isOpen) return;
-    const handleKeyDown = (e: KeyboardEvent) => e.key === "Escape" && onClose();
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, onClose]);
-
-  // Animation Variants
-  const overlayVariants = { hidden: { opacity: 0 }, visible: { opacity: 1 }, exit: { opacity: 0 } };
-  const dialogVariants = {
-    slide: { hidden: { y: 30 }, visible: { y: 0 }, exit: { y: -20 } },
-    fade: { hidden: { opacity: 0 }, visible: { opacity: 1 }, exit: { opacity: 0 } },
-    scale: { hidden: { scale: 0.9 }, visible: { scale: 1 }, exit: { scale: 0.9 } },
-  };
-
-  // Default size presets
-  const sizeClasses = { small: "w-[400px]", medium: "w-[500px]", large: "w-[600px]" };
-
   return (
     <AnimatePresence>
       {isOpen && (
-        <>
-          {/* Overlay */}
-          <motion.div
-  key="dialog-overlay"
-  className={`fixed inset-0 top-0 left-0 w-screen h-screen ${overlayColor} z-[100] flex justify-center items-center`}
-  variants={overlayVariants}
-  initial="hidden"
-  animate="visible"
-  exit="exit"
-  transition={{ duration: 0.3 }}
-  onClick={onClose}
-/>
-
+        <motion.div
+          key="dialog-overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          className={`fixed inset-0 w-full h-full ${overlayColor} z-[60] flex justify-center items-center`}
+          onClick={onClose}
+        >
           {/* Dialog Box */}
           <motion.div
-  key="dialog-box"
-  className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${sizeClasses[size]} h-auto ${dialogColor} ${borderRadius} ${shadow} z-[110] ${padding}`}
-  variants={dialogVariants[animationType]}
-  initial="hidden"
-  animate="visible"
-  exit="exit"
-  transition={{ duration: 0.4, ease: "easeOut" }}
-  onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
->
-            {/* Header Section */}
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                {/* Icon */}
-                {icon && <Image src={icon} alt="Alert Icon" width={24} height={24} />}
-                <h2 className={`text-lg font-semibold ${textColor}`}>{title}</h2>
-              </div>
-              {/* Close Button */}
-              <button className="text-gray-400 hover:text-white" onClick={onClose}>
-                {closeButton || <IconX className="w-5 h-5" />}
+            key="dialog-box"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            className={`w-[470px] md:w-[570px] h-auto border rounded-xl border-white/15 ${dialogColor} p-8 z-[70] shadow-lg`}
+            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
+          >
+            {/* Alert Header */}
+            <div className="w-full flex gap-3 items-center mb-2">
+              {/* Icon (Uses `IconAlertHexagon` as default) */}
+              {icon ? (
+                <Image src={icon} alt="Alert Icon" width={22} height={22} className="rounded-lg" />
+              ) : (
+                <IconAlertHexagon size={22} className="text-yellow-400" />
+              )}
+              
+              {/* Header */}
+              <span className="text-[18px] font-semibold text-white">{title}</span>
+              <button className="ml-auto text-gray-500 hover:text-white" onClick={onClose}>
+                <IconX size={20} />
               </button>
             </div>
 
             {/* Description */}
-            <p className={`text-sm mt-2 ${textColor}/80 leading-[170%]`}>{description}</p>
+            <p className="text-[#FBF8F8]/60 text-sm mt-2 leading-[170%]">{description}</p>
 
             {/* Buttons */}
-            <div className="flex justify-end gap-4 mt-6">
+            <div className="w-full justify-end flex gap-3 mt-4">
               <motion.button
-                className="px-4 py-2 border border-gray-500/40 rounded-lg text-white/80 text-sm transition hover:border-gray-400 hover:text-white"
+                className="px-[10px] py-[4px] md:px-[16px] md:py-[8px] border border-[#727272]/40 rounded-lg text-[#FFFFFF]/70 text-sm font-medium transition-all duration-300 hover:border-[#727272] hover:text-[#FFFFFF] hover:shadow-lg hover:shadow-[#ffffff]/10"
                 whileTap={{ scale: 0.95 }}
-                onClick={onClose}
+                onClick={onCancel || onClose}
               >
                 {cancelText}
               </motion.button>
               <motion.button
-                className="px-4 py-2 border border-blue-500/40 rounded-lg bg-blue-700 text-white text-sm transition hover:border-blue-500 hover:bg-blue-800"
+                className="px-[16px] py-[10px] border border-[#61DAFB]/40 rounded-lg bg-[#022432]/80 text-[#FFFFFF]/70 text-sm font-medium transition-all duration-300 hover:border-[#61DAFB] hover:text-[#FFFFFF] hover:shadow-lg hover:shadow-[#61DAFB]/10 hover:bg-[#022432]"
                 whileTap={{ scale: 0.95 }}
-                onClick={onConfirm}
+                onClick={onConfirm || onClose}
               >
                 {confirmText}
               </motion.button>
             </div>
           </motion.div>
-        </>
+        </motion.div>
       )}
     </AnimatePresence>
   );
