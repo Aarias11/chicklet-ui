@@ -6,3 +6,6 @@ export { default as ConfirmationDialog } from "./ConfirmationDialog";
 
 export * from "./SuccessDialog";
 export { default as SuccessDialog } from "./SuccessDialog";
+
+export * from "./ErrorDialog";
+export { default as ErrorDialog } from "./ErrorDialog";
