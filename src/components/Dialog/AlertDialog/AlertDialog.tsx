@@ -74,7 +74,7 @@ const AlertDialog: React.FC<DialogProps> = ({
           {/* Overlay */}
           <motion.div
             key="dialog-overlay"
-            className={`fixed inset-0 w-full h-full ${overlayColor} z-[100] flex justify-center items-center`}
+            className={`fixed top-0 left-0 inset-0 w-full h-full ${overlayColor} z-[100] flex justify-center items-center`}
             variants={overlayVariants}
             initial="hidden"
             animate="visible"
