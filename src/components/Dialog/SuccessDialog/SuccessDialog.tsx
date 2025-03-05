@@ -1,41 +1,36 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { IconX, IconAlertHexagon } from "@tabler/icons-react";
+import { IconCircleDashedCheck, IconCircleDashed } from "@tabler/icons-react";
 import Image from "next/image";
 
-interface AlertDialogProps {
+interface SuccessDialogProps {
   isOpen: boolean;
   onClose: () => void;
   title?: string;
   description?: string;
-  icon?: string; // Optional custom image icon
-  iconColor?: string; // ✅ Allows changing the default icon color
+  icon?: string;
+  iconColor?: string;
   confirmText?: string;
-  cancelText?: string;
   onConfirm?: () => void;
-  onCancel?: () => void;
   overlayColor?: string;
   dialogColor?: string;
 }
 
-const AlertDialog: React.FC<AlertDialogProps> = ({
+const SuccessDialog: React.FC<SuccessDialogProps> = ({
   isOpen,
   onClose,
-  title = "Just a Heads Up!",
-  description = "Your session is about to expire. Don’t lose your progress! Click ‘Stay Logged In’ to continue.",
+  title = "Nailed It!",
+  description = "Your settings have been saved successfully. You're all set!",
   icon,
-  iconColor = "text-yellow-400", // ✅ Default yellow, but can be overridden
-  confirmText = "Stay Logged In",
-  cancelText = "Log Out",
+  iconColor = "text-green-500",
+  confirmText = "Awesome",
   onConfirm,
-  onCancel,
   overlayColor = "bg-black/80",
   dialogColor = "bg-black",
 }) => {
-  const dialogRef = useRef<HTMLDivElement>(null);
-
+  
   // ✅ Handle Escape Key Press
   useEffect(() => {
     if (!isOpen) return;
@@ -47,6 +42,7 @@ const AlertDialog: React.FC<AlertDialogProps> = ({
     };
 
     window.addEventListener("keydown", handleKeyDown);
+    
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
@@ -71,57 +67,50 @@ const AlertDialog: React.FC<AlertDialogProps> = ({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            ref={dialogRef}
-            role="dialog"
-            aria-modal="true"
             className={`w-[470px] md:w-[570px] h-auto border rounded-xl border-white/15 ${dialogColor} p-8 z-[70] shadow-lg`}
             onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
           >
-            {/* Alert Header */}
+            {/* Success Header */}
             <div className="w-full flex gap-3 items-center mb-2">
-              {/* Animated Icon */}
+              {/* Icon Animation */}
               {icon ? (
-                <Image src={icon} alt="Alert Icon" width={22} height={22} className="rounded-lg" />
+                <Image src={icon} alt="Success Icon" width={24} height={24} className="rounded-lg" />
               ) : (
                 <motion.div
-                  initial={{ rotate: -90, scale: 0.5, opacity: 0 }}
-                  animate={{ rotate: 0, scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
                   className="relative flex items-center justify-center"
                 >
-                  {/* Hexagon rotates into place */}
+                  {/* Dotted Circle Animation */}
                   <motion.div
-                    initial={{ rotate: 0, scale: 0 }}
-                    animate={{ rotate: 360, scale: 1 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1, rotate: 360 }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
+                    className="absolute"
                   >
-                    <IconAlertHexagon size={28} className={`${iconColor}`} />
+                    <IconCircleDashedCheck size={36} className={iconColor} stroke={1} />
                   </motion.div>
 
-                  
+                  {/* Checkmark Appearing */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.5, duration: 0.3, ease: "easeOut" }}
+                  >
+                    <IconCircleDashed size={26} className={iconColor} stroke={1} />
+                  </motion.div>
                 </motion.div>
               )}
 
-              {/* Header */}
+              {/* Header Text */}
               <span className="text-[18px] font-semibold text-white">{title}</span>
-
-              
             </div>
 
             {/* Description */}
             <p className="text-[#FBF8F8]/60 text-sm mt-2 leading-[170%]">{description}</p>
 
-            {/* Buttons */}
+            {/* Confirm Button */}
             <div className="w-full justify-end flex gap-3 mt-4">
               <motion.button
-                className="px-[10px] py-[4px] md:px-[16px] md:py-[8px] border border-[#727272]/40 rounded-lg text-[#FFFFFF]/70 text-sm font-medium transition-all duration-300 hover:border-[#727272] hover:text-[#FFFFFF] hover:shadow-lg hover:shadow-[#ffffff]/10"
-                whileTap={{ scale: 0.95 }}
-                onClick={onCancel || onClose}
-              >
-                {cancelText}
-              </motion.button>
-              <motion.button
-                className="px-[16px] py-[10px] border border-[#61DAFB]/40 rounded-lg bg-[#022432]/80 text-[#FFFFFF]/70 text-sm font-medium transition-all duration-300 hover:border-[#61DAFB] hover:text-[#FFFFFF] hover:shadow-lg hover:shadow-[#61DAFB]/10 hover:bg-[#022432]"
+                className="px-[16px] py-[10px] border border-[#39C92F]/40 rounded-lg bg-[#27BF29]/80 text-[#FFFFFF]/70 text-sm font-medium transition-all duration-300 hover:border-[#39C92F] hover:text-[#FFFFFF] hover:shadow-lg hover:shadow-[#27BF29]/30 hover:bg-[#27BF29]"
                 whileTap={{ scale: 0.95 }}
                 onClick={onConfirm || onClose}
               >
@@ -135,4 +124,4 @@ const AlertDialog: React.FC<AlertDialogProps> = ({
   );
 };
 
-export default AlertDialog;
+export default SuccessDialog;

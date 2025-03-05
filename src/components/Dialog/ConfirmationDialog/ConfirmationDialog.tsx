@@ -2,8 +2,9 @@
 
 import React, { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { IconAlertCircle } from "@tabler/icons-react";
+import { IconAlertCircle, IconCircle } from "@tabler/icons-react";
 import Image from "next/image";
+
 
 interface ConfirmationDialogProps {
   isOpen: boolean;
@@ -27,8 +28,8 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
   description = "If you delete this, it’s gone for good. No take-backs! Are you sure you want to continue?",
   icon,
   iconColor = "text-red-500",
-  confirmText = "Stay Logged In",
-  cancelText = "Log Out",
+  confirmText = "Confirm",
+  cancelText = "Cancel",
   onConfirm,
   onCancel,
   overlayColor = "bg-black/80",
@@ -37,11 +38,11 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
   
   // ✅ Handle Escape Key Press
   useEffect(() => {
-    if (!isOpen) return; // Only add event listener when dialog is open
+    if (!isOpen) return; 
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        onClose(); // Close the dialog when Escape key is pressed
+        onClose(); 
       }
     };
 
@@ -72,15 +73,34 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
             className={`w-[470px] md:w-[570px] h-auto border rounded-xl border-white/15 ${dialogColor} p-8 z-[70] shadow-lg`}
-            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
+            onClick={(e) => e.stopPropagation()} 
           >
             {/* Confirmation Header */}
             <div className="w-full flex gap-3 items-center mb-2">
-              {/* Icon (Uses `IconAlertCircle` as default, color customizable) */}
+              {/* Animated Icon */}
               {icon ? (
                 <Image src={icon} alt="Confirmation Icon" width={24} height={24} className="rounded-lg" />
               ) : (
-                <IconAlertCircle size={24} className={iconColor} />
+                <motion.div className="relative flex items-center justify-center">
+                  {/* Pulsating Background */}
+                  <motion.div
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1.1, opacity: 1 }}
+                    transition={{ duration: 0.6, repeat: 2, repeatType: "reverse" }}
+                    className="absolute"
+                  >
+                    <IconAlertCircle size={38} className={`${iconColor} opacity-50`} />
+                  </motion.div>
+
+                  {/* Alert Icon Bounce-In */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.6, duration: 0.3, ease: "easeOut" }}
+                  >
+                    <IconCircle size={32} className={iconColor} stroke={1} />
+                  </motion.div>
+                </motion.div>
               )}
               
               {/* Header */}
