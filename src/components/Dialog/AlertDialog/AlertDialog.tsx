@@ -73,27 +73,27 @@ const AlertDialog: React.FC<DialogProps> = ({
         <>
           {/* Overlay */}
           <motion.div
-            key="dialog-overlay"
-            className={`fixed top-0 left-0 inset-0 w-full h-full ${overlayColor} z-[100] flex justify-center items-center`}
-            variants={overlayVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            transition={{ duration: 0.3 }}
-            onClick={onClose}
-          />
+  key="dialog-overlay"
+  className={`fixed inset-0 top-0 left-0 w-screen h-screen ${overlayColor} z-[100] flex justify-center items-center`}
+  variants={overlayVariants}
+  initial="hidden"
+  animate="visible"
+  exit="exit"
+  transition={{ duration: 0.3 }}
+  onClick={onClose}
+/>
 
           {/* Dialog Box */}
           <motion.div
-            key="dialog-box"
-            className={`${sizeClasses[size]} h-auto ${dialogColor} ${borderRadius} ${shadow} z-[110] ${padding}`}
-            variants={dialogVariants[animationType]}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
-          >
+  key="dialog-box"
+  className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${sizeClasses[size]} h-auto ${dialogColor} ${borderRadius} ${shadow} z-[110] ${padding}`}
+  variants={dialogVariants[animationType]}
+  initial="hidden"
+  animate="visible"
+  exit="exit"
+  transition={{ duration: 0.4, ease: "easeOut" }}
+  onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
+>
             {/* Header Section */}
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
