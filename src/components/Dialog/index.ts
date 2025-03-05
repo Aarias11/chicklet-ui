@@ -1,3 +1,2 @@
-
-export * from "./AlertDialog/AlertDialog";
-export { default as AlertDialog } from "./AlertDialog/AlertDialog";
+export * from "./AlertDialog";
+export { default as AlertDialog } from "./AlertDialog";
